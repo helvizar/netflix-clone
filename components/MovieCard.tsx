@@ -1,19 +1,22 @@
-import React from 'react';
+import React from "react";
+import { useRouter } from "next/router";
 
-import { BsFillPlayFill } from 'react-icons/bs';
-import FavoriteButton from './FavoriteButton';
+import { BsFillPlayFill } from "react-icons/bs";
+import FavoriteButton from "./FavoriteButton";
 
 interface MovieCardProps {
-    data: Record<string, any>
+    data: Record<string, any>;
 }
 
 const MovieCard: React.FC<MovieCardProps> = ({
     data
-}) => {
+ }) => {
+    const router = useRouter();
+
     return (
         <div className="group bg-zinc-900 col-span relative h-[12vw]">
             <img
-            className="
+                className="
                 cursor-pointer
                 object-cover
                 transition
@@ -26,8 +29,8 @@ const MovieCard: React.FC<MovieCardProps> = ({
                 w-full
                 h-[12vw]
             "
-            src={data.thumbnailUrl} alt="Thumbnail" />
-            <div 
+                src={data.thumbnailUrl} alt="Thumbnail" />
+            <div
                 className="
                     opacity-0
                     absolute
@@ -47,7 +50,7 @@ const MovieCard: React.FC<MovieCardProps> = ({
                 "
             >
                 <img
-                className="
+                    className="
                     cursor-pointer
                     object-cover
                     transition
@@ -57,7 +60,7 @@ const MovieCard: React.FC<MovieCardProps> = ({
                     w-full
                     h-[12vw]
                 "
-                src={data.thumbnailUrl} alt="Thumbnail" />
+                    src={data.thumbnailUrl} alt="Thumbnail" />
                 <div
                     className="
                         z-10
@@ -88,12 +91,12 @@ const MovieCard: React.FC<MovieCardProps> = ({
                         transition
                         hover:bg-neutral-300
                         "
-                        onClick={() => {}}>
+                        onClick={() => router.push(`/watch/${data?.id}`)}>
                             <BsFillPlayFill size={30} />
                         </div>
                         <FavoriteButton movieId={data?.id} />
                     </div>
-                    
+
                     <p className="text-green-400 font-semibold mt-4">
                         New <span className="text-white">2023</span>
                     </p>
@@ -107,7 +110,7 @@ const MovieCard: React.FC<MovieCardProps> = ({
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default MovieCard;
